@@ -67,7 +67,7 @@ This section shows how to setup a single-node Hadoop cluster in docker. We will 
         syan83/hadoop-core
     ```
     
-    For example, to mount a directory from your computer to the directory `\home\hadoop\examples` inside the container, first change your working directory into that directory, then run:
+    For example, to mount a directory from your computer to the directory `/home/hadoop/examples` inside the container, first change your working directory into that directory, then run:
     
 	```
 	docker run -it \
@@ -75,7 +75,7 @@ This section shows how to setup a single-node Hadoop cluster in docker. We will 
         -p 19888:19888 \
         -p 50070:50070 \
         --name hadoop-core \
-        --mount type=bind,source="$(pwd)",target=home\hadoop\examples \
+        --mount type=bind,source="$(pwd)",target=/home/hadoop/examples \
         syan83/hadoop-core
     ```
 
