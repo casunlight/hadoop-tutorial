@@ -29,7 +29,7 @@ To install the latest version of docker on your computer, please follow the inst
 
 ## Pseudo-Distributed Mode:
 
-This section shows how to setup a single-node Hadoop cluster in docker. We will use the docker image `syan/hadoop-core` as an example. To use other image, simple replace `syan/hadoop-core` with the image's REPOSITORY or ID.
+This section shows how to setup a single-node Hadoop cluster in docker. We will use the docker image `syan/hadoop-core` as an example. To use another image, simple replace `syan/hadoop-core` with the image's REPOSITORY or ID.
 
 1. Open a terminal window (Mac: Terminal, Windows: PowerShell)
 2. Pull the latest docker image:
