@@ -16,6 +16,7 @@ This guide describes how to pull and run a hadoop cluster using Docker. You can 
 	- `Tez: 0.9.1`
 	- `Hive: 2.3.3`
 	- `Pig: 0.17.0`
+	- `Sqoop: 1.4.7`
  
 ## Prerequisites:
 
