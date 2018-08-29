@@ -21,12 +21,8 @@ CREATE TABLE state.areas (
   state STRING,
   area INT
 )
-ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
-WITH SERDEPROPERTIES (
-   "separatorChar" = ",",
-   "quoteChar" = "\""
-)
-STORED AS TEXTFILE
+ROW FORMAT DELIMITED
+  FIELDS TERMINATED BY ','
 TBLPROPERTIES ("skip.header.line.count"="1");
 
 LOAD DATA INPATH 'state-areas.csv' OVERWRITE INTO TABLE state.areas;
@@ -38,12 +34,8 @@ CREATE TABLE state.abbrevs (
   state STRING,
   abbreviation VARCHAR(4)
 )
-ROW FORMAT SERDE 'org.apache.hadoop.hive.serde2.OpenCSVSerde'
-WITH SERDEPROPERTIES (
-   "separatorChar" = ",",
-   "quoteChar" = "\""
-)
-STORED AS TEXTFILE
+ROW FORMAT DELIMITED
+  FIELDS TERMINATED BY ','
 TBLPROPERTIES ("skip.header.line.count"="1");
 
 LOAD DATA INPATH 'state-abbrevs.csv' OVERWRITE INTO TABLE state.abbrevs;
