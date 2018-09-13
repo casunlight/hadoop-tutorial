@@ -1,5 +1,5 @@
 #!/bin/bash
-for i in $( ls ../data/state-*.csv); do
+for i in $( ls ../data/state-db/state-*.csv); do
     if ! $(hadoop fs -test -d $i) ; then
         echo "Adding data $i to hdfs"
         hadoop fs -put $i;
