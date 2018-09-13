@@ -1,9 +1,7 @@
-import json
-
 from mrjob.job import MRJob
-from mrjob.protocol import JSONValueProtocol, RawValueProtocol
+from mrjob.protocol import JSONValueProtocol
 
-class MRWordFrequencyCount(MRJob):
+class MRTest(MRJob):
     
     INPUT_PROTOCOL = JSONValueProtocol
     
@@ -12,4 +10,4 @@ class MRWordFrequencyCount(MRJob):
 
         
 if __name__ == '__main__':
-    MRWordFrequencyCount.run()
+    MRTest.run()
