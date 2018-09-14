@@ -9,23 +9,24 @@ class MRTrainTestSplit(MRJob):
     INPUT_PROTOCOL = JSONValueProtocol
     OUTPUT_PROTOCOL = JSONValueProtocol
     
-    def __init__(self, args):
-        super().__init__(args)
-        self.SUBSET ='train'
-        self.TEST_SIZE = .8
-    
+    def configure_args(self):
+        super().configure_args()
+        self.add_passthru_arg('-s', '--split', )
+        self.add_passthru_arg('-t', '--test_size', type=float)
+        
+    def mapper_init(self):
+        if self.options.split not in ('train', 'test'):
+            raise ValueError('Invalid split value')
+        if self.options.test_size > 1 or self.options.test_size < 0:
+            raise ValueError('Invalid test size')
+        
     def mapper(self, _, value):
         key = value.get('jobId', 0)
-        flag = MRTrainTestSplit._sample(key=key, fraction=self.TEST_SIZE)
-        if self.SUBSET == 'train':
-            flag = not flag
-        if flag:
+        include = self._sample(key=key, fraction=self.options.test_size)
+        if include ^ (self.options.split=='train'):
             yield _, value
     
-    @staticmethod
-    def _sample(key, fraction=1):
-        if fraction > 1 or fraction < 0:
-            raise ValueError('Invalid fraction value')
+    def _sample(self, key, fraction=1):
         frac = decimal.Decimal(str(fraction)).as_tuple()
         numer = sum([v*10**i for i, v in enumerate(frac.digits[::-1])])
         denom = 10**(-frac.exponent)
