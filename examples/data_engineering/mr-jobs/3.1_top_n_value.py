@@ -1,7 +1,9 @@
 from mrjob.job import MRJob
+from mrjob.step import MRStep
 from mrjob.protocol import JSONValueProtocol
 
 import heapq
+
 
 class MRTopNValue(MRJob):
     
@@ -10,7 +12,7 @@ class MRTopNValue(MRJob):
         
     def configure_args(self):
         super().configure_args()
-        self.add_passthru_arg('-n', '--top_n', type=int)
+        self.add_passthru_arg('--top_n', type=int)
         
     def mapper(self, _, value):
         try:
@@ -36,6 +38,15 @@ class MRTopNValue(MRJob):
     def reducer_final(self):
         for value in self.top_n:
             yield None, value
+            
+    def steps(self):
+        return [MRStep(mapper=self.mapper,
+                       combiner_init=self.reducer_init,
+                       combiner=self.reducer,
+                       combiner_final=self.reducer_final,
+                       reducer_init=self.reducer_init,
+                       reducer=self.reducer,
+                       reducer_final=self.reducer_final)]
 
 
 if __name__ == '__main__':

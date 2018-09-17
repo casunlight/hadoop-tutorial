@@ -4,6 +4,7 @@ from mrjob.protocol import JSONValueProtocol
 import decimal
 import hashlib
 
+
 class MRTrainTestSplit(MRJob):
     
     INPUT_PROTOCOL = JSONValueProtocol
@@ -11,8 +12,8 @@ class MRTrainTestSplit(MRJob):
     
     def configure_args(self):
         super().configure_args()
-        self.add_passthru_arg('-s', '--split', )
-        self.add_passthru_arg('-t', '--test_size', type=float)
+        self.add_passthru_arg('--split')
+        self.add_passthru_arg('--test_size', type=float, default=0.3)
         
     def mapper_init(self):
         if self.options.split not in ('train', 'test'):
