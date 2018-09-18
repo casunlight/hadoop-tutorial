@@ -1,5 +1,5 @@
 *.jar
 *.class
 .DS_Store
-mr-output/
+mr-output*/
 .ipynb_checkpoints/
